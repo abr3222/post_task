@@ -1,10 +1,17 @@
 source 'https://rubygems.org'
 
 # Rails alternative framework
-gem 'sinatra', '2.0.4'
+gem 'sinatra'
 
 # Databases
-gem 'pg',      '1.1.3'
+gem "pg"
+
+#Active Record
+gem "activerecord"
+gem "sinatra-activerecord"
+
+# For using namespaces
+gem 'sinatra-contrib'
 
 #Auto restarts
 gem 'rerun',   '0.13.0'
