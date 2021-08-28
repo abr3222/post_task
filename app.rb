@@ -1,8 +1,8 @@
 require 'sinatra'
-require 'sinatra/activerecord'
-require "sinatra/namespace"
-require './models/user'
-require './models/post'
+%w[config models].each do |dir|
+  $LOAD_PATH << File.expand_path('.', File.join(File.dirname(__FILE__), dir))
+  require File.join(File.dirname(__FILE__), dir, 'manifest')
+end
 
 set :bind, '0.0.0.0'
 set :port, 8080
