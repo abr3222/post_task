@@ -1,2 +1,3 @@
-require 'users_controller'
-require 'posts_controller'
+Dir[File.join(__dir__, "/concerns/**/*.rb")].each { |file| require file }
+require 'users'
+require 'posts'
