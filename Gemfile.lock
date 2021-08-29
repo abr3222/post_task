@@ -12,6 +12,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    awesome_print (1.9.2)
     concurrent-ruby (1.1.9)
     dotenv (2.7.6)
     ffi (1.15.3)
@@ -58,6 +59,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  awesome_print
   dotenv
   pg
   rerun (= 0.13.0)

@@ -8,6 +8,9 @@ gem 'sinatra'
 # Databases
 gem "pg"
 
+# Value
+gem 'awesome_print'
+
 #keep ENV
 gem 'dotenv'
 
