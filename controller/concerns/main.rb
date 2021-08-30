@@ -2,7 +2,8 @@ module Main
 
   def authentication
     content_type 'application/json'
-    error 401  unless params[:key] == "12345679"
+    @user = User.where(:authentication_token => params[:key]).first
+    error 401  if @user.blank?
   end
 
 end
