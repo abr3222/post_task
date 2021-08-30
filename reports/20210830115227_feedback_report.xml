@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <feedbacks>
+    <feedback>
+      <owner>Hafiz ABR</owner>
+      <comment>Yes</comment>
+      <feedback_type>User</feedback_type>
+      <average_rating>[]</average_rating>
+    </feedback>
+    <feedback>
+      <owner>Hafiz Hassan</owner>
+      <comment>Yes</comment>
+      <feedback_type>Post</feedback_type>
+      <average_rating>0.0</average_rating>
+    </feedback>
+  </feedbacks>
+</root>
