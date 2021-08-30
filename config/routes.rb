@@ -1,36 +1,41 @@
-get '/' do
-  'Welcome to Posting API APP!'
-end
+require 'sinatra/base'
 
-namespace '/api/users' do
+# get '/' do
+#   'Welcome to Posting API APP!'
+# end
+
+# define route that don't need auth in here
+class OpenAPI < Sinatra::Base
   before do
     content_type 'application/json'
   end
 
-  get '/sign_in' do
+  get '/auth/sign_in' do
     sign_in
   end
 end
-namespace '/api/v1' do
 
+class AuthedAPI < Sinatra::Base
   before do
     authentication
   end
 
-  get '/users' do
+  set :prefix,"/api/v1"
+
+  get "#{settings.prefix}/users" do
     all_users
   end
 
-  get '/posts' do
-    all_posts
+  get "#{settings.prefix}/posts" do
+      all_posts
   end
 
-  post '/posts' do
-    create_post
+  post "#{settings.prefix}/posts" do
+      create_post
   end
 
-  post '/rate_post' do
-    rate_post
+  post "#{settings.prefix}/rate_post" do
+      rate_post
   end
 
 end

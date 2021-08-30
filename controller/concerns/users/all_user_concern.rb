@@ -6,8 +6,10 @@ module Users
     end
 
     def sign_in
-      check_user = User.where(:user_name => params[:user_name] , :encrypted_password => params[:password])
-      unless check_user.nil?
+      user = User.find_by_user_name(params[:user_name])
+      check_user = user.authenticate(params[:password])
+
+      if check_user
         o = [('a'..'z'), ('A'..'Z') , (0..9)].map(&:to_a).flatten
         check_user.update(:authentication_token => (0...10).map { o[rand(o.length)] }.join)
         {status: 200 , data: check_user}.to_json

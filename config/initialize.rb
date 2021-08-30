@@ -1,10 +1,7 @@
 require 'sinatra/activerecord'
-require "sinatra/namespace" #Comment this Before Running rake task as Both define same namespace function
+require "sinatra/namespace"
 require "awesome_print"
 require 'nokogiri'
 require 'pry'
 require 'faker'
-
-set :bind, '0.0.0.0'
-set :port, 8081
 

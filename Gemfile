@@ -19,8 +19,12 @@ gem 'dotenv'
 gem 'nokogiri'
 gem 'whenever', require: false
 
-# Generate Data for Seed
+# Generate Data for Seeds
 gem 'faker'
+gem 'httpx'
+
+#Password Encryption
+gem 'bcrypt'
 
 group :development do
   gem 'awesome_print'

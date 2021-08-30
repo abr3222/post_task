@@ -1,6 +1,3 @@
-require './app'
-require 'sinatra/activerecord/rake'
-
-# task :generate_report do
-#   Feedback.generate_xml_report
-# end 
+require "./app"
+require "sinatra/activerecord/rake"
+Dir.glob('lib/tasks/*.rake').each { |r| load r}

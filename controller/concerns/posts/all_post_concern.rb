@@ -14,15 +14,22 @@ module Posts
 
     def rate_post
       input_params = JSON.parse(request.body.read)
-      Rating.create(value:input_params["ratings"] , post_id: input_params["post_id"])
-      total_ratings = Rating.where(post_id: input_params["post_id"])
-      new_ratings = 0
-      total_ratings.each do |rating|
-        new_ratings = new_ratings + rating.value
+      post = Post.find_by_id(input_params["post_id"])
+
+      if post.nil?
+        {status: 404 , error: "Post Not Found to create Ratting" }.to_json
+      else
+        Rating.create(value:input_params["ratings"] , post_id: input_params["post_id"])
+        total_ratings = Rating.where(post_id: input_params["post_id"])
+        new_ratings = 0
+        total_ratings.each do |rating|
+          new_ratings = new_ratings + rating.value
+        end
+        new_ratings = ( new_ratings / (total_ratings.count) )
+        post.update(total_ratings: new_ratings)
+        {status: 200 , new_ratings:new_ratings }.to_json
       end
-      new_ratings = ( new_ratings / (total_ratings.count) )
-      Post.find(input_params["post_id"]).update(total_ratings: new_ratings)
-      {status: 200 , new_ratings:new_ratings }.to_json
+
     end
 
   end
