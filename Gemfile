@@ -1,25 +1,28 @@
 source 'https://rubygems.org'
+
 #ruby
 ruby '2.7.1'
-
-# Rails alternative framework
-gem 'sinatra'
 
 # Databases
 gem "pg"
 
-# Value
-gem 'awesome_print'
+# for alternative to Rails framework
+gem 'sinatra'
+gem "sinatra-activerecord"
+gem 'sinatra-contrib'
+gem 'rerun'
 
 #keep ENV
 gem 'dotenv'
 
-#Active Record
-gem "activerecord"
-gem "sinatra-activerecord"
+# Generate XML Report
+gem 'nokogiri'
+gem 'whenever', require: false
 
-# For using namespaces
-gem 'sinatra-contrib'
+# Generate Data for Seed
+gem 'faker'
 
-#Auto restarts
-gem 'rerun',   '0.13.0'
+group :development do
+  gem 'awesome_print'
+  gem 'pry'
+end
