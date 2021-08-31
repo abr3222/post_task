@@ -28,10 +28,44 @@ module Posts
           new_ratings = new_ratings + rating.value
         end
         new_ratings = ( new_ratings / (total_ratings.count) )
-        post.update(total_ratings: new_ratings)
+        post.update(total_ratings: total_ratings.count , average_rating: new_ratings)
         {status: 200 , new_ratings:new_ratings }.to_json
       end
 
+    end
+
+    def create_feedback
+      input_params    = JSON.parse(request.body.read)
+      comment         = input_params["comment"]
+      owner_id        = input_params["owner_id"]
+      feedback_type   = input_params["feedbackable_type"]
+      feedbackable_id = input_params["feedbackable_id"].to_i
+      if feedback_type == "user" or feedback_type == "User"
+        feedbackable = User.find_by_id(feedbackable_id)
+      else
+        feedbackable = Post.find_by_id(feedbackable_id)
+      end
+
+      if feedbackable.blank? or feedbackable.nil?
+        {status: 402 , error: "Invalid #{feedback_type} ID"}.to_json
+      else
+        feedback = Feedback.create(feedbackable: feedbackable,comment:comment,owner_id: owner_id)
+        {status: 200 , data: feedback}.to_json
+      end
+    end
+
+    def get_posts_by_rating
+      Post.all.order('average_rating desc').limit(params[:number_of_posts]).map { |post| PostSerializer.new(post).to_json}.to_json
+    end
+
+    def get_authors_from_ip
+      IpAddress.all.map{|ip|
+        { ip_address: ip.ip,
+          authors: ip.posts.map{|post| 
+          {author_name: post.user.user_name} 
+        }
+      }
+      }.to_json
     end
 
   end

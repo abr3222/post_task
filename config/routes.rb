@@ -38,4 +38,18 @@ class AuthedAPI < Sinatra::Base
       rate_post
   end
 
+  post "#{settings.prefix}/feedback" do
+      create_feedback
+  end
+
+  get "#{settings.prefix}/get_posts_by_rating" do
+      get_posts_by_rating
+  end
+
+  get "#{settings.prefix}/get_authors_from_ip" do
+      get_authors_from_ip
+  end
+
+  
+
 end

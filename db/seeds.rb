@@ -38,7 +38,7 @@ post_count.times.each do
     }
     PostManager.post_request("/posts",authentication_token,body)
     i = i+1
-    puts "#{i}/ #{post_count} Post Has been Created"
+    puts "#{i}/ #{post_count*100} Post Has been Created"
   end
 end
 
