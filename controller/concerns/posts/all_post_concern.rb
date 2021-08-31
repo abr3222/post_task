@@ -20,7 +20,7 @@ module Posts
 
       if post.nil?
         {status: 404 , error: "Post Not Found to create Ratting" }.to_json
-      else
+      elsif (1..5).include? input_params["ratings"].to_i
         Rating.create(value:input_params["ratings"] , post_id: input_params["post_id"])
         total_ratings = Rating.where(post_id: input_params["post_id"])
         new_ratings = 0
@@ -30,6 +30,8 @@ module Posts
         new_ratings = ( new_ratings / (total_ratings.count) )
         post.update(total_ratings: total_ratings.count , average_rating: new_ratings)
         {status: 200 , new_ratings:new_ratings }.to_json
+      else
+        {status: 404 , error: "Ratting only could be between 1..5" }.to_json
       end
 
     end
