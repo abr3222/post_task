@@ -42,6 +42,20 @@ post_count.times.each do
   end
 end
 
+i = 0
+User.first(100).each do |user|
+  Post.first(100).each do |post|
+    params = {
+      post_id: post.id,
+      comment: Faker::Lorem.sentence,
+      owner_id: user.id
+    }
+    PostManager.post_request("/feedbacks",authentication_token,params)
+    i = i+1
+    puts "#{i}/ #{10000} Feed Back Has been Created"
+  end
+end
+
 # User.create(user_name: "Hafiz ABR")
 # User.create(user_name: "Hafiz Hassan")
 #
