@@ -7,8 +7,10 @@ module Posts
 
     def create_post
       input_params = JSON.parse(request.body.read)
-      ip_address = IpAddress.create(ip:input_params["ip_address"])
-      post = Post.create(title:input_params["title"] , content:input_params["content"] ,user_id: @user.id,ip_address:ip_address)
+      author = User.find_by_user_name(input_params["author_name"])
+      author = User.create(user_name: input_params["author_name"],password:"One@FourAll") if author.nil?
+      ip_address = IpAddress.find_or_create_by(ip:input_params["ip_address"])
+      post = Post.create(title:input_params["title"] , content:input_params["content"] ,user:author,ip_address:ip_address)
       {status: 200 , data: post}.to_json
     end
 
