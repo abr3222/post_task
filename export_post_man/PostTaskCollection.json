@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "fa995893-e2e0-4c73-9ec4-3cd98e185e60",
+		"name": "Testing ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sign In ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var result = JSON.parse(responseBody);",
+							"var data = result[\"data\"];",
+							"pm.environment.set(\"authentication_token\", data[\"authentication_token\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/auth/sign_in?user_name={{user_name}}&password={{password}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"sign_in"
+					],
+					"query": [
+						{
+							"key": "user_name",
+							"value": "{{user_name}}"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users?authentication_token={{authentication_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts?authentication_token={{authentication_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Test Post 2 Title\",\n    \"content\":\"Test Post 2 content\",\n    \"ip_address\":\"192.168.1.1\",\n    \"author_name\": \"ABR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/posts?authentication_token={{authentication_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Raiting",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"post_id\":1111119,\n    \"ratings\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/rate_post?authentication_token={{authentication_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"rate_post"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Feedback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"comment\":\"Hello from here \",\n    \"owner_id\":1,\n    \"feedbackable_type\":\"user\",\n    \"feedbackable_id\" : 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/feedback?authentication_token={{authentication_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"feedback"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Posts by rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/get_posts_by_rating?authentication_token={{authentication_token}}&number_of_posts=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"get_posts_by_rating"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						},
+						{
+							"key": "number_of_posts",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Authors From Ip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/get_authors_from_ip?authentication_token={{authentication_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"get_authors_from_ip"
+					],
+					"query": [
+						{
+							"key": "authentication_token",
+							"value": "{{authentication_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

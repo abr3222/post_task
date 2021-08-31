@@ -66,3 +66,6 @@ Start the Application server
 
     $ rake generate_report 
 
+### 8. For Create a Report without cron job
+-------------------------------
+Import the Json file of Collection and Env from export_post_man folder
